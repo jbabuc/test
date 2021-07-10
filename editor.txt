@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8"/>
+  <meta name="Generator" content="EditPlus®"/>
+  <meta name="Author" content=""/>
+  <meta name="Keywords" content=""/>
+  <meta name="Description" content=""/>
+  <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+  <meta http-equiv="Content-Security-Policy" content="*" />
+  <title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+    $( document ).ready(function() {
+        console.log( "document loaded" );
+        console.log($("#kashika").load("abc.txt"));
+    });
+    </script>
+ </head>
+ <body>
+ <textarea id="kashika" rows="2" style="width:100%;"></textarea>
+ </body>
+</html>
