@@ -1,0 +1,248 @@
+URL:
+https://my.metlife.com/en
+https://metsso.alico.corp/
+https://onemetlife.webex.com/meet/janardhan.chintapnbmetlife.com
+
+http://inblrprdazdv01:8080/tfs/MicroServices/Buy-Online/_git/ms-customer
+https://devtools.metlife.com/artifactory/
+https://uatdockerdtr.alico.corp/
+https://uatdockerucp.alico.corp/
+
+Webex: ------------------------>
+https://onemetlife.webex.com/meet/harsh.r.parmarpnbmetlife.com
+https://onemetlife.webex.com/meet/janardhan.chintapnbmetlife.com
+https://onemetlife.webex.com/meet/ramsushil.patel2pnbmetlife.com
+https://onemetlife.webex.com/meet/vishal.malipnbmetlife.com
+https://onemetlife.webex.com/meet/deepak.inglepnbmetlife.com
+
+
+Servers ------------------------>
+    QA 
+        http://10.168.49.20:2034/swagger-ui.html#/
+        Windows: 10.168.50.158
+        Unix: 10.168.49.20/3210357pul
+
+    UAT
+        Unix: 10.168.50.221, 10.168.50.222, 10.168.50.223, 10.168.50.224 (M),10.168.50.225/ pnbnadm/
+        URL DTR https://uatdockerdtr.alico.corp/
+        URL UCP https://uatdockerucp.alico.corp/
+        Sonar: http://10.168.2.196:9000/ pmli_services
+        
+    Production 
+        Linux : 10.168.2.90-99
+
+
+Windows ------------------------>
+    jmeter -n -t mytest.jmx -l myresults.jtl
+
+Unix ------------------------>
+on 225 /usr/lib/jvm/jdk1.8.0_271
+ls -1 | wc -l
+du -sh directory
+find . -name jre -type f 2>/dev/null
+curl -X POST -H "Content-Type: application/json"  -d "{ \"loginId\": \"3340962\", \"loginType\": 1000, \"clientId\": \"20017231\", \"fileContent\": \"JVBERi0xLjQ\" }" http://10.168.50.224:2266/api/v1/pmli/file-storage/upload
+tar -xvzf file.tar.gz
+ps -ef | cat
+ps -ef | less
+ps -o vsz=,rss= pid
+ps up pid
+/usr/lib/jvm/jdk1.8.0_271/bin/javac
+touch -d 20210224 ms-customer-inblrstgdkdt01.alico.corp.log
+set -o vi
+export PS1="\`pwd\` [\`whoami\`]$ "
+grep --include=\*.properties -r . -e 10\.168\.50\.250
+
+
+Docker Commands -------------------
+docker ps -a
+docker build -t ms-file-storage-test:20201223 .
+docker images
+docker stop containerid
+docker start containerid
+docker rm containerid
+docker rmi imageid
+docker load dockerimage
+docker image save imageid -o filename
+docker node ls
+docker node inspect <nodeid>
+docker service ls
+docker service inspect <serviceid>
+docker service update --force --update-parallelism 1 --update-delay 30s <service-id>
+docker service update --image uatdockerdtr.alico.corp/buy-online/customer:4084 <service-id>
+docker service update --env-add SERVERPORT=3141 <service-id>
+docker service ps <service-id>
+docker service update --mount-rm /usr/logs/dsp/ <service-id>
+docker service update --mount-add type=bind,source=/usr/logs/dsp,destination=/home/LogStorage,bind-propagation=rslave <service-id>
+docker service update --replicas=2 <service-id>
+docker service ls | grep 2144 | cut -f 1 -d " "
+
+docker login uatdockerdtr.alico.corp 
+
+vi Dockerfile 
+
+docker build -t ms-file-storage-test:20201223 
+
+docker tag 01c635cbf1be uatdockerdtr.alico.corp/dsp/ms-file-storage-test:multipart20201227 
+docker push uatdockerdtr.alico.corp/dsp/ms-file-storage-test:multipart20201227 
+docker rmi uatdockerdtr.alico.corp/dsp/ms-file-storage-test:tomcat20201224 
+
+Git Commands ------------------------>
+git init
+git remote add origin http://inblrprdazdv01:8080/tfs/MicroServices/Buy-Online/_git/ms-util
+git remote show origin
+// BASE64 Encode --> 3495987jan:mkvp3vnq2psb42k6xxvojiiiq5qhmnivndwknf7ixj5ibfwdnj4a
+git -c http.extraHeader="Authorization: Basic MzQ5NTk4N2phbjpta3ZwM3ZucTJwc2I0Mms2eHh2b2ppaWlxNXFobW5pdm5kd2tuZjdpeGo1aWJmd2RuajRh" clone http://inblrprdazdv01:8080/tfs/MicroServices/Buy-Online/_git/bo-application-config
+
+
+
+git add -A
+git push -u origin --all
+
+git fetch
+git fetch --all
+git fetch --dry-run
+
+git pull origin
+git pull origin branch
+
+git switch -f branch
+git status
+git diff pom.xml
+git diff origin/master -- src/main/java/com/pmli/dsp/microservices/FileStorageApplication.java
+
+git checkout -b branchname
+git merge branchname
+git mergetool --tool emerge
+git merge --abort
+
+git fetch origin master
+git reset --hard origin/master
+git reset <file>
+
+git log --pretty=format:"%h - %an, %ar : %s" -n 2
+
+
+Maven ------------------------>
+mvn -Pmetlife compile
+mvn -X
+mvn -DskipTests clean compile package install
+mvn deploy
+mvn sonar:sonar 
+mvn -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true clean jacoco:prepare-agent install jacoco:report sonar:sonar
+
+
+Mongo  ------------------------>
+To clear screen CTRL+l 
+use admin
+db.auth("admin","admin")
+show dbs/collections/users/roles/profile/databases
+db.collection.find()
+db.getName()
+db.grantRolesToUser('admin',[{ role: 'dbAdmin', db: 'msutil-test' }])
+db.colname.drop()
+db.createUser({'user': 'admin', 'pwd': 'admin', 'roles': [{ role: 'dbAdmin', db: 'msutil-test' }]})
+db.getUsers()
+db.dropUser('admin')
+{'criticalInfoDetails.criticalInfoDiseaseDetails.0.alcohalDetails.0':{$exists:true}}
+
+Oracle ------------------------------>
+select * from sys.all_tab_columns col where col.column_name like '%IFSC%'
+
+Openssl ------------------------>
+openssl genrsa -out private_key.pem 1024
+openssl rsa -in private_key.pem -out public_key.pem -outform PEM -pubout
+openssl rand -base64 15 | tee randompass.txt
+openssl rsautl -encrypt -inkey public_key.pem -pubin -in randompass.txt | base64 -w 0 | tee encryptedB64pass.txt
+base64 -d -w 0 encryptedB64pass.txt | openssl rsautl -decrypt -inkey private_key.pem | tee -a decryptedpass.txt
+
+Gradle ------------------------>
+gradle cleanTest test
+gradle artifactoryPublish
+
+Dev run: docker run -m 512MB -d --restart=always -e JAVA_OPTIONS='-Xmx512m' --net=dsp-overlay --name ms-file-storage -v /home/3210357pul/logstorage:/home/3210357pul/logstorage -v /home/3210357pul/filestorage_temp:/home/3210357pul/filestorage_temp -e config-server-url=http://bypass:2042  -e SPRING_PROFILES_ACTIVE=dev -e SPRING_CLOUD_CONFIG_URI=http://bypass:2025 -p 2156:2156 -t ms-file-storage:21dec20
+
+-DmaxConnections=1000 -DacceptCount=200 -DmaxThreads=1 -DminSpareThreads=1
+
+
+/usr/lib/jvm/jdk1.8.0_271/bin/java -Xms1024m -Xmx1024m -DenableDebug=true -Dspring.cloud.config.uri=http://localhost:2020 -Dspring.profiles.default=dev -Dthreads=400 -Dport=2166 -jar /home/pnbnadm/test-filestorage/ms-file-storage-0.0.1.jar > ms-file-storage.log &
+
+ENTRYPOINT ["java", "-Xms1024m", "-Xmx1024m", "-Djava.security.egd=file:/dev/./urandom", "-DenableDebug=true" -Dspring.cloud.config.uri=http://localhost:1111", "-Dspring.profiles.default=dev", "-Dthreads=400", -Dport=2166", "-jar","/microservice-filestorage.jar"]
+
+docker run -m 2048MB -d --restart=always -e JAVA_OPTIONS='-Xmx512m' --net=dsp-overlay --name ms-customer-dashboard -v /home/3210357pul/logstorage/:/home/LogStorage -e config-server-url=http://10.168.49.20:2042 -p 2156:2156 -t ms-file-storage:23dec20
+
+docker run -d --restart=no -e JAVA_OPTIONS='-Xms1024m -Xmx1024m' --net=ms-file
+docker login uatdockerdtr.alico.corp
+vi Dockerfile
+docker build -t ms-file-storage-test:multipart20201227 .storage-network-test --name ms-file-storage-test -v /home/pnbnadm/test-filestorage/logstorage/:/home/logstorage -v /home/pnbnadm/test-filestorage/filestorage/:/home/filestorage -e config-server-url=http://bypass:2020 -e threads=400 -e SPRING_PROFILES_ACTIVE=dev -e SPRING_CLOUD_CONFIG_URI=http://bypass:2020 -e port=2166  -e enableDebug=true -p 2166:2166 -t ms-file-storage:23dec20
+
+docker tag 01c635cbf1be uatdockerdtr.alico.corp/dsp/ms-file-storage-test:multipart20201227
+docker push uatdockerdtr.alico.corp/dsp/ms-file-storage-test:multipart20201227
+docker exec -it containerid sh
+docker logs -f containerid
+docker rmi uatdockerdtr.alico.corp/dsp/ms-file-storage-test:tomcat20201224
+
+
+
+
+
+
+https://metlife.plateau.com/learning/user/nativelogin.jsp
+http://10.168.50.225:2156/api/v1/pmli/file-storage/upload
+
+
+curl -X POST -F "files=@testfile.txt" -F "files=@testfile.txt" -F "files=@testfile.txt" -F "files=@testfile.txt" http://localhost:2156/api/v1/pmli/file-storage/uploadex
+
+
+
+keytool -J-Djava.net.useSystemProxies=true -printcert -rfc -sslserver repo.jfrog.org > d:/apache-maven/repojfrogorg.cer
+
+keytool -importcert -file d:/apache-maven/repojfrogorg.cer -alias repojfrogorg -storepass changeit -keystore d:/apache-maven/cacerts
+
+keytool -delete -alias marketplaceeclipseorg -storepass changeit -keystore d:/apache-maven/cacerts
+
+java -Djavax.net.ssl.trustStore=d:/apache-maven/cacerts -Djavax.net.ssl.trustStorePassword=changeit -Djavax.net.ssl.trustStoreType=JKS -Djavax.net.debug=all get https://repo.maven.apache.org
+
+https://repo.jfrog.org/artifactory/libs-release-bintray/org/springframework/boot/spring-boot-gradle-plugin/2.4.1/spring-boot-gradle-plugin-2.4.1.pom
+https://repo.jfrog.org/artifactory/libs-release-bintray/org/springframework/boot/spring-boot-gradleplugin/2.4.1/spring-boot-gradleplugin-2.4.1.pom?referrer
+
+
+
+
+mongodb://buyonlineUatUser:*****@10.168.50.147:27017/buy-online-uat?authSource=buy-online-uat
+
+
+https://uatapi-illustration.pnbmetlife.com/Nsureservices.svc/GenerateBiApi
+NVEST --- http://10.168.209.137:8080/NsureServices.svc/GenerateBiApi
+http://10.168.209.137:8080/NsureServices.svc/DownloadPdfBI?Tid=70000127856 --> quotationId
+
+
+https://uat-ebranchnxt.pnbmetlife.com/buy-online/Pre-Payment/#/home
+Your self --> LI Name null --> SameProposer = true
+Family Member --> LI name is  --> SameProposer = false
+If not SPP (Smart Platinum Plus Multiple) is 0 Or Just use from UI if multiple is 0 for SPP
+if not (Gaurante Future Plan) GFP or SPP preminum = "" blank
+Add these filds if Immediate Annuity Plan (IAP) GUAR_ANN_PAYABLE_ANNUAL = premium and EMP_DISCOUNT 0
+SSP Super Saver Plan BASE_ANN_PREMIUM = premium
+
+Fund is only for SPP
+Rider is only for SSP & GFP
+IAP has no rider
+
+"LeadAESKEY":"PSVJQRk9QTEpNVU1DWUZCRVFGV1VVT0ZOV1RRU1NaWQ=",
+"LeadAESIV":"WVdsRkxWRVpaVUZOYVdsaA=="
+
+export  abc=$(date -d@"$(( `date +%s`+19800))")
+
+
+docker labs--------------
+Run 'ssh-keygen' provide file name and empty pass phrase
+ssh -i docker-key ip172-18-0-33-c1c5cere75e000ds9jlg@direct.labs.play-with-docker.com
+
+domain switch 3499187viv/Pspl@123
+SU 3439283kun/Oct@2020
+
+
+LA UAT http://inblrapsbizp01.alico.corp/PMLI_MetSmart_Integration_WCF/MetSmartIntegration.svc?wsdl
+
+
+PROD MASTER DATA http://10.168.49.20:2026/swagger-ui.html
